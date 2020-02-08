@@ -107,26 +107,23 @@ def courses2():
 
 def main():
     sites = ['freebiesglobal','learnviral','couponscorpion','guru99','leave']
-    for i in range(len(sites)-1):
-        wb.create_sheet(sites[i])
-    print(wb.sheetnames)
-
     item = ''
     while item != 'leave':
         item = pyip.inputMenu(sites,lettered = True)
-        count = input('No of pages/items to show')
+        if item != 'leave':
+            count = input('No of pages/items to show')
+            if count.isdigit() and int(count) < 2:
+                if count.isdigit() == False:
+                    print('Key in a number')
+                    continue
+                elif int(count) < 2:
+                    print('Pages must be 2 or more')
+                    continue
 
-        if item != 'leave' and count.isdigit() and int(count) >= 2:
-            eval('%s(%s)'%(item,count))
-        else:
-            if count.isdigit() == False:
-                print('Key in a number')
-                continue
-            elif int(count) < 2:
-                print('Pages must be 2 or more') 
-
-            elif item == 'leave':
-                exit()
+                elif item == 'leave':
+                    exit()
+            else:
+                eval('%s(%s)'%(item,count))
 
 functions = ['main()','courses()','courses2()']
 choice = pyip.inputMenu(functions,lettered = True)
